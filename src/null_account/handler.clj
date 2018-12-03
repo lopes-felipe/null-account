@@ -4,9 +4,12 @@
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [null-account.controllers.account :as controllers.account]))
 
-(defroutes app-routes
-  (GET "/" [] "Hello World")
-  (route/not-found "Not Found"))
-
 (def app
-  (wrap-defaults app-routes site-defaults))
+  (api
+   {:swagger
+    {:ui "/"
+     :spec "/swagger.json"
+     :data {:info {:title "Null Account"
+                   :description "Basic Accounting API"}}}}
+
+   account/account-routes))
