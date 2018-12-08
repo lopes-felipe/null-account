@@ -1,5 +1,7 @@
 (ns null-account.services.account
-  (:require [null-account.controllers.account :as account]
+  (:require [null-account.controllers.account :as controller]
+            [null-account.components.repository.in-memory-account-repository :refer :all]
+            [com.stuartsierra.component :as component]
             [compojure.api.sweet :refer :all]
             [ring.util.http-response :refer :all]
             [schema.core :as s]))
@@ -8,27 +10,25 @@
   {:name s/Str
    :email s/Str})
 
-(defn fake-storage (component/start (->InMemoryAccountRepository)))
+(def fake-storage (component/start (->InMemoryAccountRepository)))
 
 (defn- get-account [id]
-  (account/get-account id))
+  (controller/get-account fake-storage id))
 
 (defn create-account
   [account]
   (let [{:keys [name email]} account
         account (controller/create-account! fake-storage name email)]
-    (ring-resp/response {:account account})))
+    account))
 
 (def account-routes
   (routes
    (context "/accounts" []
      (GET "/:id" []
-       :path-params [id :- Long]
-       :return (s/maybe Account)
+       :path-params [id :- java.util.UUID]
        :summary "Retrieve Account by ID"
        (ok (get-account id)))
      (POST "/" []
-       :return Account
-       :body [account Pizza]
+       :body [account Account]
        :summary "Creates a new Account"
        (ok (create-account account))))))

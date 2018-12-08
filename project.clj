@@ -5,7 +5,9 @@
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [compojure "1.6.1"]
                  [ring/ring-defaults "0.3.2"]
+                 [http-kit "2.3.0"]
 
+                 [reloaded.repl "0.2.4"]
                  [com.stuartsierra/component "0.3.2"]
                  [metosin/compojure-api "1.1.12"]
                  [metosin/ring-http-response "0.9.0"]]

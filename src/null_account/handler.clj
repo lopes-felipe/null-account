@@ -1,8 +1,8 @@
 (ns null-account.handler
-  (:require [compojure.core :refer :all]
-            [compojure.route :as route]
+  (:require [compojure.route :as route]
+            [compojure.api.sweet :refer :all]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
-            [null-account.controllers.account :as controllers.account]))
+            [null-account.services.account :as account]))
 
 (def app
   (api
