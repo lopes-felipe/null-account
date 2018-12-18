@@ -1,0 +1,1 @@
+{:database {:connection-string "datomic:free://localhost:4334/null-account"}}

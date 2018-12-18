@@ -10,12 +10,12 @@
                  [reloaded.repl "0.2.4"]
                  [com.stuartsierra/component "0.3.2"]
                  [metosin/compojure-api "1.1.12"]
-                 [metosin/ring-http-response "0.9.0"]]
+                 [metosin/ring-http-response "0.9.0"]
+                 [com.datomic/datomic-free "0.9.5656"]]
 
   :plugins [[lein-ring "0.12.4"]]
   :ring {:handler null-account.handler/app}
-  :profiles
-  {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring/ring-mock "0.3.2"]]}}
+  :profiles {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
+                                  [ring/ring-mock "0.3.2"]]}}
 
   :main ^{:skip-aot true} null-account.server)

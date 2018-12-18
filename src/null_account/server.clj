@@ -3,7 +3,9 @@
   (:require [null-account.components :as components]
             [reloaded.repl :refer [go set-init!]]))
 
-
-(defn -main []
-  (set-init! #(components/new-system))
-  (go))
+(defn -main
+  "The entry-point for 'lein run'"
+  [& args]
+  (let [env (keyword (first args))]
+    (set-init! #(components/new-system env))
+    (go)))

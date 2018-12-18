@@ -1,6 +1,6 @@
-(ns null-account.components.repository.in-memory-account-repository
-  (:require [com.stuartsierra.component :as component]
-            [null-account.protocols.account-repository :as protocols.account-repository]))
+(ns null-account.components.repository.in-memory.account-repository
+  (:require [null-account.protocols.account-repository :as protocols.account-repository]
+            [com.stuartsierra.component :as component]))
 
 (defrecord InMemoryAccountRepository []
 
@@ -15,7 +15,7 @@
 
   (create-account! [this account]
     (let [atom-map (:atom-map this)]
-      (swap! atom-map #(assoc % (:id account) account)))))
+      (swap! atom-map #(assoc % (:account/id account) account)))))
 
 "TODO: Move the test code to the test section"
 (defn test []

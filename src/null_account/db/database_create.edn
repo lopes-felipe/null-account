@@ -1,0 +1,18 @@
+;; This file contains code for the creation of the Account database and schema
+(use '[datomic.api :only [q db] :as d])
+(use 'clojure.pprint)
+
+;; store database uri
+(def uri "datomic:free://localhost:4334/null-account")
+
+;; create database
+(d/create-database uri)
+
+;; connect to database
+(def conn (d/connect uri))
+
+;; parse schema edn file
+(def schema-tx (read-string (slurp "account_schema.edn")))
+
+;; submit schema transaction
+@(d/transact conn schema-tx)
