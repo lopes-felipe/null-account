@@ -11,8 +11,14 @@
 ;; connect to database
 (def conn (d/connect uri))
 
-;; parse schema edn file
-(def schema-tx (read-string (slurp "account_schema.edn")))
+;; parse Account schema edn file
+(def account-schema (read-string (slurp "account_schema.edn")))
 
 ;; submit schema transaction
-@(d/transact conn schema-tx)
+@(d/transact conn account-schema)
+
+;; parse Account schema edn file
+(def transaction-schema (read-string (slurp "transaction_schema.edn")))
+
+;; submit schema transaction
+@(d/transact conn transaction-schema)

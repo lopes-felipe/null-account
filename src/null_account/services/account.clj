@@ -1,7 +1,6 @@
 (ns null-account.services.account
   (:require [null-account.util :as util]
             [null-account.controllers.account :as controller]
-            [com.stuartsierra.component :as component]
             [compojure.api.sweet :refer :all]
             [ring.util.http-response :refer :all]
             [schema.core :as s]))
@@ -10,11 +9,11 @@
   {:name s/Str
    :email s/Str})
 
-(defn- get-account [account-repository id]
-  (let [account (controller/get-account account-repository id)]
+(defn- get-account [account-repository transaction-repository id]
+  (let [account (controller/get-account account-repository transaction-repository id)]
     (util/nsmap->map account)))
 
-(defn- create-account
+(defn- create-account!
   [account-repository account]
   (let [{:keys [name email]} account
         account (controller/create-account! account-repository name email)]
@@ -23,13 +22,15 @@
 (def account-routes
   (routes
    (context "/accounts" []
+     :tags ["Account"]
+
      (GET "/:id" []
-       :components [account-repository]
+       :components [account-repository transaction-repository]
        :path-params [id :- java.util.UUID]
        :summary "Retrieve Account by ID"
-       (ok (get-account account-repository id)))
+       (ok (get-account account-repository transaction-repository id)))
      (POST "/" []
        :components [account-repository]
        :body [account Account]
        :summary "Creates a new Account"
-       (ok (create-account account-repository account))))))
+       (ok (create-account! account-repository account))))))

@@ -4,6 +4,7 @@
             [datomic.api :only [q db] :as d]))
 
 (defrecord DatomicAccountRepository [connection-string]
+
   component/Lifecycle
   (start [this]
     (assoc this :conn (d/connect connection-string)))

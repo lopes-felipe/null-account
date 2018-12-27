@@ -11,7 +11,7 @@
     (assoc this :http-kit (httpkit/run-server
                            (wrap-components
                             #'app
-                            (select-keys this [:account-repository]))
+                            (select-keys this [:account-repository :transaction-repository]))
                            {:port 3002})))
   (stop [this]
     (if-let [http-kit (:http-kit this)]

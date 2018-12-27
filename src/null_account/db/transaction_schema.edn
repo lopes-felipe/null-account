@@ -1,0 +1,19 @@
+[{:db/ident :transaction/id
+  :db/valueType :db.type/uuid
+  :db/cardinality :db.cardinality/one
+  :db/doc "The Transaction's Id"}
+
+ {:db/ident :transaction/account-id
+  :db/valueType :db.type/uuid
+  :db/cardinality :db.cardinality/one
+  :db/doc "An Transaction's account id"}
+
+ {:db/ident :transaction/amount
+  :db/valueType :db.type/float
+  :db/cardinality :db.cardinality/one
+  :db/doc "An Transaction's amount"}
+
+ {:db/ident :transaction/operation
+  :db/valueType :db.type/keyword
+  :db/cardinality :db.cardinality/one
+  :db/doc "An Transaction's operation"}]

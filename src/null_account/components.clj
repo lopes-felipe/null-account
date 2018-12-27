@@ -2,7 +2,9 @@
   (:require [null-account.components.http-kit :as http-kit]
             [null-account.config.config-manager :as config-manager]
             [null-account.components.repository.datomic.account-repository :refer :all]
+            [null-account.components.repository.datomic.transaction-repository :refer :all]
             [null-account.components.repository.in-memory.account-repository :refer :all]
+            [null-account.components.repository.in-memory.transaction-repository :refer :all]
             [com.stuartsierra.component :as component]))
 
 (defn get-connection-string []
@@ -12,12 +14,14 @@
 (defn base-system []
   (component/system-map
    :account-repository (->DatomicAccountRepository (get-connection-string))
-   :http-kit (component/using (http-kit/->HttpKit) [:account-repository])))
+   :transaction-repository (->DatomicTransactionRepository (get-connection-string))
+   :http-kit (component/using (http-kit/->HttpKit) [:account-repository :transaction-repository])))
 
 (defn local-system []
   (merge (base-system)
          (component/system-map
-          :account-repository (->InMemoryAccountRepository))))
+          :account-repository (->InMemoryAccountRepository)
+          :transaction-repository (->InMemoryTransactionRepository))))
 
 (def systems
   {:local (local-system)

@@ -1,7 +1,7 @@
 [{:db/ident :account/id
   :db/valueType :db.type/uuid
   :db/cardinality :db.cardinality/one
-  :db/doc "An Account's Id"}
+  :db/doc "The Account's Id"}
 
  {:db/ident :account/name
   :db/valueType :db.type/string
