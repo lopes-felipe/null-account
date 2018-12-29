@@ -16,13 +16,3 @@
   (create-account! [this account]
     (let [atom-map (:atom-map this)]
       (swap! atom-map #(assoc % (:account/id account) account)))))
-
-"TODO: Move the test code to the test section"
-(defn test []
-  (let [repository (component/start (->InMemoryAccountRepository))]
-
-    (protocols.account-repository/create-account! repository {:id 123
-                                                              :name "Felipe Lopes"
-                                                              :email "lopes_felipe@icloud.com"})
-
-    (println (protocols.account-repository/get-account repository 123))))
