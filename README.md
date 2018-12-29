@@ -6,7 +6,7 @@ A simple Clojure API represeting a really basic banking account service.
 
 ### Ports and Adapters Architecture
 
-This API is organized based on the ["ports and adapters" architecture](https://fideloper.com/hexagonal-architecture), a.k.a "hexagonal" architecture .
+This API is organized based on the ["ports and adapters" architecture](https://fideloper.com/hexagonal-architecture), a.k.a "hexagonal" architecture.
 
 ### Components
 
@@ -15,6 +15,10 @@ This API uses the [components](https://github.com/stuartsierra/component) abstra
 ### Swagger
 
 This API is compliant to the Swagger specification and provides a test UI for validation purposes on its root path.
+
+### Code Standards
+
+This API code follows the Batsov's [Clojure Style Guide](https://github.com/bbatsov/clojure-style-guide).
 
 ### Storage
 
