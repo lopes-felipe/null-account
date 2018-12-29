@@ -11,7 +11,7 @@
   "Calculates the account's balance due based on its transactions"
   (reduce
    (fn [balance-due transaction]
-     (if (= (:transaction/operation transaction) :operation/credit)
+     (if (= (:transaction/operation transaction) :credit)
        (+ balance-due (:transaction/amount transaction))
        (- balance-due (:transaction/amount transaction))))
    0 transactions))

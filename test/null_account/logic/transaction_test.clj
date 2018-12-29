@@ -18,11 +18,11 @@
   (testing "Logic's balance due calculation"
     (let [transactions [{:transaction/id         123
                          :transaction/account-id 456
-                         :transaction/operation  :operation/credit
+                         :transaction/operation  :credit
                          :transaction/amount     100.50}
                         {:transaction/id         789
                          :transaction/account-id 456
-                         :transaction/operation  :operation/debit
+                         :transaction/operation  :debit
                          :transaction/amount     50}]
           balance-due  (logic.transaction/calculate-balance-due transactions)]
 

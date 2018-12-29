@@ -2,4 +2,4 @@
   (:require [clojure.edn :as edn]))
 
 (defn load-config []
-  (edn/read-string (slurp "src/null_account/config/app_settings.edn")))
+  (edn/read-string (slurp "config/app_settings.edn")))

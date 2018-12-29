@@ -23,5 +23,5 @@
      (POST "/" []
        :components [transaction-repository]
        :body [transaction Transaction]
-       :summary "Retrieve Transaction by ID"
+       :summary "Creates a new transaction for a given account"
        (ok (create-transaction! transaction-repository transaction))))))
